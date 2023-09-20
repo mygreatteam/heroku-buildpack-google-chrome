@@ -137,9 +137,12 @@ for PACKAGE in $PACKAGES; do
   fi
 done
 
-if [ -f $ENV_DIR/GOOGLE_CHROME_URL ]; then
-  topic "Renaming chrome deb to google-chrome-stable_current_amd64.deb"
-  mv $APT_CACHE_DIR/archives/google-chrome-stable* $APT_CACHE_DIR/archives/google-chrome-stable_current_amd64.deb
+if [ -z "$downloadUrl" ]; then
+  topic "No chrome donwload url found. Skipping renaming."
+else
+  PACKAGE_NAME=$(basename downloadUrl .deb)
+  topic "Renaming ${PACKAGE_NAME} to google-chrome-stable_current_amd64.deb"
+  mv $APT_CACHE_DIR/archives/$PACKAGE_NAME $APT_CACHE_DIR/archives/google-chrome-stable_current_amd64.deb
 fi
 
 mkdir -p $BUILD_DIR/.apt
