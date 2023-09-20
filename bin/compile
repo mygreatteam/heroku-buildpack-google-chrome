@@ -138,9 +138,9 @@ for PACKAGE in $PACKAGES; do
 done
 
 if [ -z "$downloadUrl" ]; then
-  topic "No chrome donwload url found. Skipping renaming."
+  topic "No chrome donwload url found in environment. Skipping renaming."
 else
-  PACKAGE_NAME=$(basename downloadUrl .deb)
+  PACKAGE_NAME=$(basename $downloadUrl .deb)
   topic "Renaming ${PACKAGE_NAME} to google-chrome-stable_current_amd64.deb"
   mv $APT_CACHE_DIR/archives/$PACKAGE_NAME $APT_CACHE_DIR/archives/google-chrome-stable_current_amd64.deb
 fi
